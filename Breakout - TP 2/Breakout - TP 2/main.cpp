@@ -28,19 +28,25 @@ struct Rectangle
 	int limitMax = 420;
 	int limitMin = 40;
 	bool isObjective = false;
+	bool isActive = true;
+	float r = 0;
+	float g = 0;
+	float b = 0;
 };
 
 float randColor();
 
-void buildObjective(Rectangle obj);
+void buildObjective(Rectangle& obj, int actualObj);
 
 bool BallHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH);
 
 int main()
 {
+	srand(time(0));
+
 	const int screenWidth = 460;
 	const int screenHeight = 680;
-	const int amountObjectives = 10;
+	const int amountObjectives = 20;
 
 	int screenCenterX = screenWidth / 2;
 	int screenCenterY = screenHeight / 2;
@@ -59,10 +65,10 @@ int main()
 
 	for (int i = 0; i < amountObjectives; i++)
 	{
-		buildObjective(objectives[i]);
+		buildObjective(objectives[i], i);
 	}
 
-	slWindow(screenWidth, screenHeight, "Prueba", false);
+	slWindow(screenWidth, screenHeight, "BREAKOUT", false);
 
 	while (!slShouldClose() && !slGetKey(SL_KEY_ESCAPE))
 	{
@@ -95,6 +101,14 @@ int main()
 		if (BallHasCollide(ball.pos.x, ball.pos.y, ball.radius, player.pos.x, player.pos.y, player.width, player.height))
 			ball.speedY *= -1.0f;
 
+		for (int i = 0; i < amountObjectives; i++)
+			if (BallHasCollide(ball.pos.x, ball.pos.y, ball.radius, objectives[i].pos.x, objectives[i].pos.y, objectives[i].width, objectives[i].height))
+				if (objectives[i].isActive)
+				{
+					objectives[i].isActive = false;
+					ball.speedY *= -1.0f;
+				}
+
 		//----------------------------------------
 
 		slSetForeColor(0.1f, 0.5f, 0.9f, 0.4f);
@@ -102,6 +116,14 @@ int main()
 		slRectangleFill(player.pos.x, player.pos.y, player.width, player.height);
 
 		slCircleFill(ball.pos.x, ball.pos.y, ball.radius, ball.numVertices);
+
+		for (int i = 0; i < amountObjectives; i++)
+		{
+			slSetForeColor(objectives[i].r, objectives[i].g, objectives[i].b, 0.4f);
+
+			if (objectives[i].isActive)
+				slRectangleFill(objectives[i].pos.x, objectives[i].pos.y, objectives[i].width, objectives[i].height);
+		}
 
 		slRender();
 
@@ -124,45 +146,36 @@ int main()
 
 float randColor()
 {
-	float color = rand() % 10;
+	float color = rand() % 5;
 
 	return color;
 }
 
-void buildObjective(Rectangle obj)
+void buildObjective(Rectangle& obj, int actualObj)
 {
 	static bool reachLimit = false;
-	int posSum = 20;
+	static int posX = 10;
+	static int posY = 500;
 
-	obj.width = 20;
+	int modNumX = 40;
+	int modNumY = 50;
+
+	obj.width = 30;
 	obj.height = 20;
 	obj.isObjective = true;
+	obj.r = randColor();
+	obj.g = randColor();
+	obj.b = randColor();
 
-	if (obj.pos.x < obj.limitMax)
-	{
+	obj.pos.x = obj.limitMax - posX;
+	obj.pos.y = posY;
 
-
-		if (obj.pos.x == obj.limitMax)
-		{
-			obj.pos.x += posSum;
-			bool rechLimitMax = true;
-		}
-		else
-		{
-			obj.pos.x += posSum;
-			obj.pos.y == 600;
-		}
-	}
-	else if (obj.pos.x == obj.limitMax)
-	{
-		if (obj.pos.x == obj.limitMin)
-		{
-			obj.pos.x -= posSum;
-			bool rechLimitMax = false;
-		}
-		else
-			obj.pos.x -= posSum;
-	}
+	if (actualObj < 9)
+		posX += modNumX;
+	else if (actualObj > 9)
+		posX -= modNumX;
+	else
+		posY += modNumY;
 }
 
 bool BallHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH)

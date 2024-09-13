@@ -1,0 +1,18 @@
+﻿  main.cpp
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(45,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,107): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,93): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,83): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,69): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,50): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,42): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(101,30): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,136): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,115): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,98): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,77): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,51): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,43): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(105,31): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Breakout - TP 2\main.cpp(149,14): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  Breakout - TP 2.vcxproj -> C:\Users\Aula 1\Documents\GitHub\BreakoutRepo\Breakout - TP 2\Debug\Breakout - TP 2.exe
