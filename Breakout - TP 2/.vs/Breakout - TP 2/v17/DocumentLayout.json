@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Aula 1\\source\\repos\\Breakout - TP 2\\",
+  "WorkspaceRootPath": "C:\\Users\\Aula 1\\Documents\\GitHub\\BreakoutRepo\\Breakout - TP 2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B79F2BE-C559-4DC3-B56B-BC3FE3926701}|Breakout - TP 2\\Breakout - TP 2.vcxproj|C:\\Users\\Aula 1\\source\\repos\\Breakout - TP 2\\Breakout - TP 2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{9B79F2BE-C559-4DC3-B56B-BC3FE3926701}|Breakout - TP 2\\Breakout - TP 2.vcxproj|C:\\Users\\Aula 1\\Documents\\GitHub\\BreakoutRepo\\Breakout - TP 2\\Breakout - TP 2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9B79F2BE-C559-4DC3-B56B-BC3FE3926701}|Breakout - TP 2\\Breakout - TP 2.vcxproj|solutionrelative:Breakout - TP 2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\Aula 1\\source\\repos\\Breakout - TP 2\\Breakout - TP 2\\main.cpp",
+              "DocumentMoniker": "C:\\Users\\Aula 1\\Documents\\GitHub\\BreakoutRepo\\Breakout - TP 2\\Breakout - TP 2\\main.cpp",
               "RelativeDocumentMoniker": "Breakout - TP 2\\main.cpp",
-              "ToolTip": "C:\\Users\\Aula 1\\source\\repos\\Breakout - TP 2\\Breakout - TP 2\\main.cpp",
+              "ToolTip": "C:\\Users\\Aula 1\\Documents\\GitHub\\BreakoutRepo\\Breakout - TP 2\\Breakout - TP 2\\main.cpp",
               "RelativeToolTip": "Breakout - TP 2\\main.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAACAAAA",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAWwJMAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-13T13:35:02.052Z",
               "EditorCaption": ""
