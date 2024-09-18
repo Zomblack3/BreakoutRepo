@@ -15,8 +15,8 @@ struct Ball
 	Pos pos;
 	double radius = 10.0;
 	int numVertices = 15;
-	float speedY = 10;
-	float speedX = 5;
+	float speedY = 500 * slGetDeltaTime();
+	float speedX = 250 * slGetDeltaTime();
 	bool isActive = false;
 };
 
@@ -36,9 +36,11 @@ struct Rectangle
 
 float randColor();
 
-void buildObjective(Rectangle& obj, int actualObj);
+void buildObjective(Rectangle& obj, int actualObj, int amountObj);
 
-bool BallHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH);
+bool areAllBlocksDead(Rectangle obj[], int amountObjs);
+
+bool ballHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH);
 
 int main()
 {
@@ -46,10 +48,13 @@ int main()
 
 	const int screenWidth = 460;
 	const int screenHeight = 680;
-	const int amountObjectives = 20;
+	const int amountObjectives = 41;
 
 	int screenCenterX = screenWidth / 2;
 	int screenCenterY = screenHeight / 2;
+
+	int timer = 0;
+	int score = 0;
 
 	Ball ball;
 	Rectangle player;
@@ -65,13 +70,16 @@ int main()
 
 	for (int i = 0; i < amountObjectives; i++)
 	{
-		buildObjective(objectives[i], i);
+		buildObjective(objectives[i], i, amountObjectives);
 	}
 
 	slWindow(screenWidth, screenHeight, "BREAKOUT", false);
 
+	int font = slLoadFont("C:/Users/Aula 1/Downloads/Oswald/static/oswald-medium.ttf");
+
 	while (!slShouldClose() && !slGetKey(SL_KEY_ESCAPE))
 	{
+
 		if (ball.isActive == true)
 		{
 			ball.pos.x += ball.speedX;
@@ -98,18 +106,55 @@ int main()
 				ball.speedY *= -1.0f;
 		}
 
-		if (BallHasCollide(ball.pos.x, ball.pos.y, ball.radius, player.pos.x, player.pos.y, player.width, player.height))
-			ball.speedY *= -1.0f;
+		if (ballHasCollide(ball.pos.x, ball.pos.y, ball.radius, player.pos.x, player.pos.y, player.width, player.height))
+			if (ball.pos.y > player.pos.y && timer == 0)
+			{
+				ball.speedY *= -1.0f;
+
+				timer = 5;
+			}
+			else if (ball.pos.y <= player.pos.y && timer == 0)
+			{
+				ball.speedX *= -1.0f;
+
+				timer = 5;
+			}
 
 		for (int i = 0; i < amountObjectives; i++)
-			if (BallHasCollide(ball.pos.x, ball.pos.y, ball.radius, objectives[i].pos.x, objectives[i].pos.y, objectives[i].width, objectives[i].height))
+			if (ballHasCollide(ball.pos.x, ball.pos.y, ball.radius, objectives[i].pos.x, objectives[i].pos.y, objectives[i].width, objectives[i].height))
 				if (objectives[i].isActive)
 				{
 					objectives[i].isActive = false;
 					ball.speedY *= -1.0f;
+					++score;
 				}
 
+		if (areAllBlocksDead(objectives, amountObjectives))
+		{
+			for (int i = 0; i < amountObjectives; i++)
+			{
+				objectives[i].isActive = true;
+				objectives[i].r = randColor();
+				objectives[i].g = randColor();
+				objectives[i].b = randColor();
+			}
+		}
+
+		if (timer != 0)
+			--timer;
+
+		if (ball.speedY < 0 && ball.isActive == false)
+			ball.speedY *= -1.0f;
+
 		//----------------------------------------
+
+		//slSetForeColor(1, 1, 1, 1.5f);
+
+		slSetForeColor(randColor(), randColor(), randColor(), 1.5f);
+
+		slSetFont(font, 14);
+
+		slText(200, 300, "Puntaje: ");
 
 		slSetForeColor(0.1f, 0.5f, 0.9f, 0.4f);
 
@@ -119,7 +164,7 @@ int main()
 
 		for (int i = 0; i < amountObjectives; i++)
 		{
-			slSetForeColor(objectives[i].r, objectives[i].g, objectives[i].b, 0.4f);
+			slSetForeColor(objectives[i].r, objectives[i].g, objectives[i].b, 1.5f);
 
 			if (objectives[i].isActive)
 				slRectangleFill(objectives[i].pos.x, objectives[i].pos.y, objectives[i].width, objectives[i].height);
@@ -146,19 +191,22 @@ int main()
 
 float randColor()
 {
-	float color = rand() % 5;
+	float color = rand() % 11 + 1;
+
+	color /= 10.f;
 
 	return color;
 }
 
-void buildObjective(Rectangle& obj, int actualObj)
+void buildObjective(Rectangle& obj, int actualObj, int amountObj)
 {
 	static bool reachLimit = false;
+	static bool hadStop = false;
 	static int posX = 10;
 	static int posY = 500;
 
 	int modNumX = 40;
-	int modNumY = 50;
+	int modNumY = 25;
 
 	obj.width = 30;
 	obj.height = 20;
@@ -170,15 +218,35 @@ void buildObjective(Rectangle& obj, int actualObj)
 	obj.pos.x = obj.limitMax - posX;
 	obj.pos.y = posY;
 
-	if (actualObj < 9)
-		posX += modNumX;
-	else if (actualObj > 9)
-		posX -= modNumX;
+	if (actualObj % 10 == 0)
+	{
+		if (!hadStop)
+			hadStop = true;
+		else
+			hadStop = false;
+
+		if (actualObj % 10 == 0 && actualObj != 0)
+			posY += modNumY;
+	}
 	else
-		posY += modNumY;
+		if (hadStop)
+			posX += modNumX;
+		else
+			posX -= modNumX;
 }
 
-bool BallHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH)
+bool areAllBlocksDead(Rectangle obj[], int amountObjs)
+{
+	for (int i = 0; i < amountObjs; i++)
+	{
+		if (obj[i].isActive)
+			return false;
+	}
+
+	return true;
+}
+
+bool ballHasCollide(float cX, float cY, float cRadius, float rX, float rY, float rW, float rH)
 {
 	// temporary variables to set edges for checkin
 	float pointX = cX;
@@ -189,10 +257,10 @@ bool BallHasCollide(float cX, float cY, float cRadius, float rX, float rY, float
 	else if (cX > rX + rW / 2)
 		pointX = rX + rW / 2; // test right edge
 
-	if (cY < rY)
-		pointY = rY; // test up edge
-	else if (cY > rY + rH)
-		pointY = rY + rH; // test down edge
+	if (cY < rY - rH / 2)
+		pointY = rY; // test down edge
+	else if (cY > rY + rH / 2)
+		pointY = rY + rH; // test up edge
 
 	// get distance from closest edges
 	float distX = cX - pointX;
