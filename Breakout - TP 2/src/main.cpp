@@ -58,7 +58,7 @@ int main()
 	int timerRM = 0;
 	int score = 0;
 	int lifes = 3;
-	int winConditionScore = 80;
+	int winConditionScore = 12;
 
 	bool rainbowMode = false;
 	bool isDead = false;
@@ -165,7 +165,7 @@ int main()
 		if (ball.speedY < 0 && ball.isActive == false)
 			ball.speedY *= -1.0f;
 
-		if (isDead || score == winConditionScore)
+		if (isDead || score >= winConditionScore)
 		{
 			ball.isActive = false;
 
@@ -228,7 +228,7 @@ int main()
 
 			slText(screenCenterX - 75, screenCenterY - 30, "Presione R para reiniciar");
 		}
-		else if (score == winConditionScore)
+		else if (score >= winConditionScore)
 		{
 			slSetForeColor(0, 1, 0, 1.5f);
 
