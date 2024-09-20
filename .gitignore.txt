@@ -1,3 +1,0 @@
-Breakout - TP 2/.vs/
-Breakout - TP 2/Debug/
-Breakout - TP 2/Breakout - TP 2/Debug/
